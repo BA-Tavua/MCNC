@@ -1,0 +1,458 @@
+
+<! DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet"
+        href="./CSS/styles.css" />
+        <meta charset="UTF-8">
+        <title>NCNZ Form</title>
+        <script src="./scripts.js"></script>
+    </head>
+
+<body>
+    <form id="msform">
+<div class="mobile">
+<img src="./Images/CompanyIcon.png" alt="Company Icon" class="mobile">
+</div>
+
+
+<!-- progressbar -->
+    <ul id="progressbar" class="mobile">
+        <li class="active">Personal Info</li>
+        <li>Bank Details</li>
+        <li>Work Type</li>
+        <li>Vehicle Allowance</li>
+        <li>Expense Reimbursement</li>
+        <li>Summary</li>
+      </ul>
+      <!-- fieldsets -->
+
+      <fieldset >
+        <h2 class="fs-title">Your details</h2>
+        <h3 class="fs-subtitle">This is step 1</h3>
+        <input type="text" id="lblFName" placeholder="First Name" class="PerDetailtxtBox" name="First Name">
+        <input type="text" id="lblLName" placeholder="Last Name" class="PerDetailtxtBox" name="Last Name">
+        <input type="text" id="lblIRD" class="PerDetailtxtBox" placeholder="IRD Number" name="IRD">
+        <textarea id="lblAddress" class="PerDetailtxtBox" placeholder="Address" Name="Address"></textarea>
+        <input type="text" id="lblEmail" class="PerDetailtxtBox" placeholder="Email Address" Name="Email Address">
+        <br/>
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+
+
+    <fieldset class="fieldsetCSS1">
+        <h2 class="fs-title">Please attach a blank deposit slip or complete the following.</h2>
+        <h3 class="fs-subtitle">Bank Details</h3>
+        <input type="text" id="lblNOA" name="Name of Account" placeholder="Account Name" class="PerDetailtxtBox">
+        <input type="text" id="lblAccount" placeholder="Account No." name="Account NO"class="PerDetailtxtBox">
+        <input type="text" id="lblBank" placeholder="Bank" name="Bank" class="PerDetailtxtBox">
+        <input type="text" id="lblSuffix" placeholder="Suffix" name="Suffix" class="PerDetailtxtBox">
+        <input type="text" id="lblBranch" placeholder="Branch" name="Branch"class="PerDetailtxtBox">
+        <h3 class="fs-subtitle">Deposit Slip</h3>
+        <input type="file" id="myfileupLoadslip" placeholder="Deposit Slip" name="Deposit Slip" />
+        <br/>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    <fieldset class="fieldsetCSS1">
+    
+        <h2 class="fs-title">Work Type</h2>
+        <h3 class="fs-subtitle">Please provide an IR330C if we are deducting withholding tax.</h3>
+        <h3 class="fs-subtitle">If not and GST is applicable, please complete a Tax Invoice.</h3>
+            <select name="Form Type" id="WType" onchange="GetselectedTable(this)" class="workclass"> 
+                <option value="blank">Select</option> 
+                <option value="MCM-CC">Midwifery Council Meeting - Co Chair</option> 
+                <option value="MCM-CM">Midwifery Council Meeting - Council Member</option> 
+                <option value="CR-C">Competence Review - Convenor</option> 
+                <option value="CR-P">Competence Review - Panel</option> 
+                <option value="PCC-Chair">PCC - Chair</option> 
+                <option value="PCC-Panel">PCC - Panel</option> 
+                <option value="MOS">Mentor or Supervisor</option> 
+                <option value="F-Review">First review</option> 
+                <option value="HPDT-Chair">HPDT - Chair</option> 
+                <option value="HPDT-Panel">HPDT - Panel</option> 
+                <option value="CollRefGroup">Collaborative Reference Group</option> 
+                <option value="IQM">IQM Qualification Assessment</option> 
+                <option value="ProjectWork">Project work - enter rate as per contact</option> 
+                <option value="OSCE">OSCE Assessor</option> 
+                <option value="Komaiti">Whakamātautau Komiti | Examination Committee</option> 
+                <option value="Staff-Exp">Staff expenses</option> 
+            </select>
+
+        <input type="text" id="WDescription" placeholder="Description" name="Description" class="workclass">
+        <input type="date" id="WPOF" name="Period of Work" placeholder="Period of Work" >
+        
+        <div>
+        <table class="TableExp">
+        <tr>
+            <td><label id="NoOfMeeting" for="NoOfMH"></label> </td>
+            <td><input style="visibility: hidden;" type="number" onblur="findTotal()" id="NoOfMH" name="No Of Meeting" class="amount" ></td>
+            <td><label for="NoOfMH@"></label></td>
+            <td><span class="currencyinput">
+                <input type="text" name="Rate" id="NoOfMH@Rate" readonly class="InputText " placeholder="0.00" /></span></td>
+            <td><label for="NoOfMH@RateHR">Per Hour</label></td>
+            <td><span class="currencyinput">
+                <input data-type="currency" name="No Of Meeting Total" id="NoOfMHMult" placeholder="0.00" readonly class="Single Mutliple InputText "/>
+            </span></td>
+            
+        </tr>
+        <tr id="NoOfHr4Prep">
+            <td><label id="lblFeesC2b" for="FeesC2"></label> </td>
+            <td><input style="visibility: hidden;" type="number" onblur="Row2totalValue()" id="FeesC2" name="No. of hours for preparation" class="amount"></td>
+            <td><label for="lblFeesC2C"></label></td>
+            <td><span class="currencyinput">
+                <input type="text" name="No. of hours for preparation rate" id="FeesC2NoOfMH@Rate" readonly class="InputText" placeholder="0.00"/></span></td>
+            <td><label for="lblFeesC2CNoOfMH@RateHR">Per Hour</label></td>
+            <td><span class="currencyinput">
+                <input data-type="currency" name="No. of hours for preparation Total" id="lblFeesC2CNoOfMHMult" placeholder="0.00" readonly class="Mutliple InputText"/>
+            </span></td>
+            
+        </tr>
+        <tr id="NoOfHr4Report">
+            <td><label id="lblFeesC3b" for="FeesC3"></label> </td>
+            <td><input style="visibility: hidden;" type="number" onblur="Row3totalValue()" id="FeesC3" name="No. of hours for reporting" class="amount"></td>
+            <td><label for="lblFeesC3C"></label></td>
+            <td><span class="currencyinput">
+                <input type="text" name="No. of hours for reporting rate" id="FeesC3NoOfMH@Rate" readonly class="InputText" placeholder="0.00" /></span></td>
+            <td><label for="lblFeesC3CNoOfMH@RateHR">Per Hour</label></td>
+            <td><span class="currencyinput">
+                <input data-type="currency" name="No. of hours for reporting Total" id="lblFeesC3CNoOfMHMult" placeholder="0.00" readonly class="Mutliple InputText"/>
+            </span></td>
+            
+        </tr>
+        <tr>
+            <td><label for="lblFeesSubtotal">Fees Sub Total</label></td>
+            <td><input type="text" onblur="findTotal()" id="txtFee1" name="" class="amount" hidden></td>
+            <td><label for="lblfee1"></label></td>
+            <td><input type="text" name="" id="txtfee2" hidden readonly /></td>
+            <td><label for="lblfee2" hidden></label></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="Fees Sub Total" id="sum1" placeholder="0.00" readonly class="InputText FinalClaimTotal"/>
+            </span></td>
+            
+        </tr>
+        <tr>
+            <td><label for="lblLessTax">Less withholding tax</label></td>
+            <td><input type="number" onblur="findTotal()" id="txtlesstax1" name="" class="amount" hidden></td>
+            <td><label for="lbllessTax1"></label></td>
+            <td><span class="Percentageinput">
+                <input type="number" name="Tax Percentage" id="txtLessTax2" onblur="findTax()" data-symbol="" class="currency txtboxSize PerTxtbox"/></span></td>
+            <td><a href="https://www.ird.govt.nz/-/media/project/ir/home/documents/forms-and-guides/ir300---ir399/ir330c/ir330c-2019.pdf" target="_blank" class="IRDLink">Per IR330C</a></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="Less withholding tax" id="LessTax" placeholder="0.00" readonly class="InputText"/>
+            </span></td>
+           
+            
+        </tr>
+        <tr>
+            <td><label for="lblGSTReg">Are you GST Registered?</label></td>
+            <td>
+                <select name="ddlGSTReg" onchange="GetselectedGSTValue(this)" id="ddlGSTReg"> 
+                    <option value="blank">Y/N</option> 
+                    <option value="YesGST">YES</option> 
+                    <option value="NOGST">NO</option> 
+                </select>
+            </td>
+            <td><label for="lblGSTReg1"></label></td>
+            <td><input type="text" name="txtGSTReg" id="txtGSTReg" hidden readonly /></td>
+            <td><label for="lblGSTReg2">GST</label></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="GSTTotal" id="GSTTotal" placeholder="0.00" class="amount InputText" readonly  />
+            </span></td>
+            
+        </tr>
+        <tr>
+            <td><label for="lblSubtotal">Sub Total</label></td>
+            <td><input type="text" id="txtSubTotal" name="txtSubTotal" class="amount" hidden></td>
+            <td><label for="lblSubtotal1"></label></td>
+            <td><input type="text" name="txtSubTotal1" id="txtSubTotal1" hidden readonly /></td>
+            <td><label for="lblSubtotal2" hidden></label></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="MCM-CC-SubTotal" id="MCM-CC-SubTotal" placeholder="0.00" class="amount InputText" readonly/>
+            </span></td>
+            
+        </tr>
+    </table>
+    </div>
+        
+        
+        <br/>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" /> 
+        
+    </fieldset>
+    
+    <fieldset class="fieldsetCSS1">
+   
+        <h2 class="fs-title">Motor vehicle allowance</h2>
+
+        <select name="ddlVType" onchange="GetselectedVType(this)" id="ddlVType" class="DropDown"> 
+            <option value="blank">Vehicle Type</option> 
+            <option value="PetrolorDiesel">Petrol or Diesel</option> 
+            <option value="PetrolHybrid">Petrol Hybrid</option> 
+            <option value="Electric">Electric</option>
+        </select>
+
+        <select name="ddlKPY" onchange="GetselectedVRate()" id="ddlKPY" class="DropDown" > 
+            <option value="blank">Kilometers per year</option> 
+            <option value="ddlKPYLess">Less than or equal to 14000km</option> 
+            <option value="ddlKPYGreater">Greater than or equal to 14000km</option> 
+        </select>
+        <span class="RateText">
+        <input type="number" name="KPRRate" id="KPRRate" placeholder="Rate" readonly class="InputText RateText" />
+        </span>
+        <div class="scroll"> 
+        <table class="TableExp">
+        <tr>
+            <th><label for="lblVehicleTypeDate">Date</label></th>
+            <th><label for="lblTravelFrom">Travel From</label></th>
+            <th><label for="lblTravelTo">Travel To</label></th>
+            <th><span class="Percentageinput1"><label for="lblTravelKMs">Travel KMs</label></span></th>
+            <th><label for="lblTravelTotal">Total</label></th>
+        </tr>
+
+        <tr>
+            <td><input type="date" id="WPOF" name="WPOF"></td>
+            <td><input type="text" id="txtTF1" name="txtTF1"></td>
+            <td><input type="text" id="txtTT1" name="txtTT1"></td>
+            <td><span class="Percentageinput1">
+                <input type="number" id="txtTKM1" name="txtTKM1" onchange="kmCosting()" class="txtboxSize"></span></td>
+            <td><span class="currencyinput">
+                <input type="number" name="CurTravelTotal1" id="CurTravelTotal1" placeholder="0.00" readonly class="InputText SubAdd" />
+            </span></td>
+        </tr>
+
+    
+        <tr>
+            <td><input type="date" id="WPOF" name="WPOF"></td>
+            <td><input type="text" id="txtTF2" name="txtTF2"></td>
+            <td><input type="text" id="txtTT2" name="txtTT2"></td>
+            <td><span class="Percentageinput1">
+                <input type="number" id="txtTKM2" name="txtTKM2" onchange="kmCosting()" class="txtboxSize"></span></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="CurTravelTotal2" id="CurTravelTotal2" placeholder="0.00" readonly class="InputText SubAdd" />
+            </span></td>
+        </tr>
+        <tr>
+            <td><input type="date" id="WPOF" name="WPOF"></td>
+            <td><input type="text" id="txtTF3" name="txtTF3"></td>
+            <td><input type="text" id="txtTT3" name="txtTT3"></td>
+            <td><span class="Percentageinput1">
+                <input type="number" id="txtTKM3" name="txtTKM3" onchange="kmCosting()" class="txtboxSize"></span></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="CurTravelTotal3" id="CurTravelTotal3" placeholder="0.00" readonly class="InputText SubAdd"/>
+            </span></td>
+        </tr>
+        <tr>
+            <td><input type="date" id="WPOF" name="WPOF"></td>
+            <td><input type="text" id="txtTF4" name="txtTF4"></td>
+            <td><input type="text" id="txtTT4" name="txtTT4"></td>
+            <td><span class="Percentageinput1">
+                <input type="number" id="txtTKM4" name="txtTKM4" onchange="kmCosting()" class="txtboxSize"></span></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="CurTravelTotal4" id="CurTravelTotal4" placeholder="0.00" readonly class="InputText SubAdd"/>
+            </span></td>
+        </tr>
+        <tr id="RTravelAdd1">
+            <td><input type="date" id="WPOF" name="WPOF"></td>
+            <td><input type="text" id="txtTF5" name="txtTF5"></td>
+            <td><input type="text" id="txtTT5" name="txtTT5"></td>
+            <td><span class="Percentageinput1">
+                <input type="number" id="txtTKM5" name="txtTKM5" onchange="kmCosting()" class="txtboxSize"></span></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="CurTravelTotal5" id="CurTravelTotal5" placeholder="0.00" readonly class="InputText SubAdd"/>
+        </tr>
+        
+        <tr id="RTravelAdd2">
+            <td><input type=date id=dateel2 name="2025-07-01T12:44"></td>
+            <td><input type="text" id="txtTF6" name="txtTF6"></td>
+            <td><input type="text" id="txtTT6" name="txtTT6"></td>
+            <td><span class="Percentageinput1">
+                <input type="number" id="txtTKM6" name="txtTKM6" onchange="kmCosting()" class="txtboxSize"></span></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="CurTravelTotal6" id="CurTravelTotal6" placeholder="0.00" readonly class="InputText SubAdd" />
+        </tr>
+        <tr id="RTravelAdd3">
+            <td><input id=dateel1 type=date value="2025-07-01T12:44"></td>
+            <td><input type="text" id="txtTF7" name="txtTF7"></td>
+            <td><input type="text" id="txtTT7" name="txtTT7"></td>
+            <td><span class="Percentageinput1">
+                <input type="number" id="txtTKM7" name="txtTKM7" onchange="kmCosting()" class="txtboxSize"></span></td>
+            <td><span class="currencyinput">
+                <input type="currency" name="CurTravelTotal7" id="CurTravelTotal7" placeholder="0.00" readonly class="InputText SubAdd"/>
+            </span></td>
+        </tr>
+        <tr>
+            <td><label for="KPRTotalRate" class="SubTotalExplbl">Subtotal (incl GST)</label></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><span class="currencyinput">
+            <input type="currency" name="KPRTotalRate" id="KPRTotalRate" placeholder="0.00" readonly class="InputText FinalClaimTotal"/>
+            </span>
+            </td>
+        </tr>
+
+    </table>
+    </div>
+    <br/>
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+
+    </fieldset>
+    
+    <fieldset>
+        <h2 class="fs-title">Expense Reimbursement (Please attach original receipts)</h2>
+        <div class="scroll"> 
+        <table class="TableExp">
+            <tr>
+                <th><label for="lblExpReimDesc">Description</label></th>
+                <th><label for="lblExpReimTotal">Attach Receipts</label></th>
+                <th><label for="lblExpReimTotal">Total Incl GST</label></th>
+            </tr>
+            <tr>
+                <td><input type="text" id="txtExpReimDesc1" name="txtExpReimDesc1"></td>
+                <td><input type="file" id="myfileupLoad1" name="myfileupLoad1" onchange="onclickImageBTN()"/>
+                    <button id="imgClerBtn1"  style="visibility: hidden;" onclick="javascript:myfileupLoad1.value=''; onclickImageBTNHide()">x</button></td> 
+                <td><span class="currencyinput"></span><input type="number" id="txtExpReimTotal1" name="txtExpReimTotal1" onchange="ExpReimCost()" class="ExpReim txtboxSize"></span></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="txtExpReimDesc2" name="txtExpReimDesc2"></td>
+                <td><input type="file" id="myfileupLoad2" name="myfileupLoad2" onchange="onclickImageBTN1()"/>
+                    <button id="imgClerBtn2"  style="visibility: hidden;" onclick="javascript:myfileupLoad2.value=''; onclickImageBTNHide1()">x</button></td>
+                <td><span class="currencyinput"></span><input type="number" id="txtExpReimTotal2" name="txtExpReimTotal2" onchange="ExpReimCost()" class="ExpReim txtboxSize"></span></td>
+            </tr>
+            <tr>
+                <td><label for="lblExpReimDescSubTotal" class="SubTotalExplbl">Subtotal</label></td>
+
+                <td></td>
+                <td><span class="currencyinput"></span><input type="text" id="txtExpReimSubTotal" name="txtExpReimSubTotal" readonly class="InputText FinalClaimTotal" placeholder="0.00"></span></td>
+            </tr>
+        </table>
+        </div>
+        <br/>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">Payment Summary</h2>
+        <div class="Summary">
+            <table class="SummaryTable">
+                <tr>
+                    <td><label for="lblFinalTotalClaim" class="Bold">Total Claim</label></td>
+                    <td><span class="currencyinput"></span><input type="text" id="txtFinalTotalClaim" name="txtFinalTotalClaim" readonly class="InputText" placeholder="0.00"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="lblFinalTotalWithHtx" class="Bold">Witholding Tax</label></td>
+                    <td><span class="currencyinput"></span><input type="text" id="txtFinalTotalWithHtx" name="txtFinalTotalWithHtx" readonly class="InputText" placeholder="0.00"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="lblFinalTotalGST" class="Bold">GST</label></td>
+                    <td><span class="currencyinput"></span><input type="text" id="txtFinalTotalGST" name="txtFinalTotalGST" readonly class="InputText" placeholder="0.00"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="lblFinalTotalPayment" class="Bold">Total Payment</label></td>
+                    <td><span class="currencyinput"><input type="text" id="txtFinalTotalPayment" name="txtFinalTotalPayment" readonly class="InputText"  placeholder=" 0.00"></span></td>
+            
+                </tr>
+            </table>
+    </div>
+
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+    
+    </fieldset>
+    
+
+</form>
+
+<!-- jQuery -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<!-- jQuery easing plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" type="text/javascript"></script>
+
+<script>
+    //jQuery time
+var current_fs, next_fs, previous_fs; //fieldsets
+var left, opacity, scale; //fieldset properties which we will animate
+var animating; //flag to prevent quick multi-click glitches
+
+$(".next").click(function(){
+  if(animating) return false;
+  animating = true;
+  
+  current_fs = $(this).parent();
+  next_fs = $(this).parent().next();
+  
+  //activate next step on progressbar using the index of next_fs
+  $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+  
+  //show the next fieldset
+  next_fs.show(); 
+  //hide the current fieldset with style
+  current_fs.animate({opacity: 0}, {
+    step: function(now, mx) {
+      //as the opacity of current_fs reduces to 0 - stored in "now"
+      //1. scale current_fs down to 80%
+      scale = 1 - (1 - now) * 0.2;
+      //2. bring next_fs from the right(50%)
+      left = (now * 50)+"%";
+      //3. increase opacity of next_fs to 1 as it moves in
+      opacity = 1 - now;
+      current_fs.css({
+        'transform': 'scale('+scale+')',
+        'position': 'absolute'
+      });
+      next_fs.css({'left': left, 'opacity': opacity});
+    }, 
+    duration: 800, 
+    complete: function(){
+      current_fs.hide();
+      animating = false;
+    }, 
+    //this comes from the custom easing plugin
+    easing: 'easeInOutBack'
+  });
+});
+
+$(".previous").click(function(){
+  if(animating) return false;
+  animating = true;
+  
+  current_fs = $(this).parent();
+  previous_fs = $(this).parent().prev();
+  
+  //de-activate current step on progressbar
+  $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+  
+  //show the previous fieldset
+  previous_fs.show(); 
+  //hide the current fieldset with style
+  current_fs.animate({opacity: 0}, {
+    step: function(now, mx) {
+      //as the opacity of current_fs reduces to 0 - stored in "now"
+      //1. scale previous_fs from 80% to 100%
+      scale = 0.8 + (1 - now) * 0.2;
+      //2. take current_fs to the right(50%) - from 0%
+      left = ((1-now) * 50)+"%";
+      //3. increase opacity of previous_fs to 1 as it moves in
+      opacity = 1 - now;
+      current_fs.css({'left': left});
+      previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+    }, 
+    duration: 800, 
+    complete: function(){
+      current_fs.hide();
+      animating = false;
+    }, 
+    //this comes from the custom easing plugin
+    easing: 'easeInOutBack'
+  });
+});
+</script>
+
+
+</body>
+</html>
